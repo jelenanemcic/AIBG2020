@@ -86,7 +86,8 @@ class Game:
         my_road_counter = 0
 
         # je li tu vec grad
-        if (position, 1) in self.my_cities or (position, 2) in self.my_cities or (position, 1) in self.opp_cities or (position, 2) in self.opp_cities:
+        if (position, 1) in self.my_cities or (position, 2) in self.my_cities\
+                or (position, 1) in self.opp_cities or (position, 2) in self.opp_cities:
             return 0
 
         for neighbour in neighbours:
@@ -114,17 +115,18 @@ class Game:
         if len(self.my_cities) >= 2:
             # imamo li cestu
             if my_road_counter == 0:
-                  return 0
+                return 0
 
             # imamo li dovoljno resursa za grad
-            if (self.resources['sheep'] >= 100 and self.resources['wood'] >= 100 and self.resources['wheat'] >= 100 and self.resources['clay'] >= 100):
+            if (self.resources['sheep'] >= 100 and self.resources['wood'] >= 100
+                    and self.resources['wheat'] >= 100 and self.resources['clay'] >= 100):
                 return 1
             else:
                 return 0
     
     def check_upgrade(self):
         enough_resources = self.resources['wheat'] >= 200 and self.resources['iron'] >= 300
-        upgraded_cities = len([i for (_,i) in self.my_cities if i == 2])
+        upgraded_cities = len([i for (_, i) in self.my_cities if i == 2])
         return 1 if (enough_resources and (upgraded_cities < len(self.my_cities))) else 0
     
     def is_water(self, start, end):
@@ -366,7 +368,7 @@ class Game:
 
 
 if __name__ == '__main__':
-    game = Game(Map(), Agent(epsilon=0.1, gamma=0.9, alpha=1, file='qValues.txt'))
+    game = Game(Map(), Agent(epsilon=0.1, gamma=0.9, alpha=1))
     game.train()
                 
 
